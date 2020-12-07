@@ -43,12 +43,11 @@ class Utilities(commands.Cog):
             p1 = subprocess.run(['man', f'{message}'], capture_output=True)
         
         msg = p1.stdout.decode()[:1980]
-        if p1.returncode != 0:
-            embed = Embed(title=':warning: Command Error', description='Status: Bad argument input', color=discord.Colour.red())
-            embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.name}')
-            await ctx.send(embed=embed)
-            return
 
-        embed = Embed(title=message, description=msg, color=discord.Colour.green())
+        if p1.returncode == 0:
+            embed = Embed(title=message, description=msg, color=discord.Colour.green())
+        else:
+            embed = Embed(title=':warning: Command Error', description='Status: Bad argument input', color=discord.Colour.red())
+            
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.name}')
         await ctx.send(embed=embed)
