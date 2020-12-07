@@ -1,4 +1,6 @@
 import os
+import subprocess
+import textwrap
 
 import logging
 
@@ -26,7 +28,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="!man ",
+    command_prefix="!",
     help_command=helpCommand
 )
 
