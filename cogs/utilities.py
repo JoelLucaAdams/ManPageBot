@@ -41,6 +41,7 @@ class Utilities(commands.Cog):
         if p1.returncode != 0:
             await ctx.send("`Status: Bad argument input`")
             return
+            
         embed = Embed(title=message, description=msg, color=discord.Colour.blue())
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.name}')
         await ctx.send(embed=embed)
