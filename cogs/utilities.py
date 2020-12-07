@@ -5,6 +5,7 @@ from discord import Member
 from discord import Embed
 import time
 import subprocess
+import platform
 
 
 class Utilities(commands.Cog):
@@ -34,14 +35,18 @@ class Utilities(commands.Cog):
     @commands.command()
     async def man(self, ctx: Context, message: str):
         """
-        Replies with message
+        Replies with man page message
         """
-        p1 = subprocess.run(['C:\\Users\\joelu\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe', '-c', 'man', f'{message}'], capture_output=True)
+        if platform.system() is "Windows":
+            p1 = subprocess.run(['C:\\Users\\joelu\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe', '-c', 'man', f'{message}'], capture_output=True)
+        else:
+            p1 = subprocess.run(['man', f'{message}'], capture_output=True)
+        
         msg = p1.stdout.decode()[:1980]
         if p1.returncode != 0:
             await ctx.send("`Status: Bad argument input`")
             return
-            
+
         embed = Embed(title=message, description=msg, color=discord.Colour.blue())
         embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.name}')
         await ctx.send(embed=embed)
