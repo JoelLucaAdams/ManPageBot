@@ -49,5 +49,5 @@ class Utilities(commands.Cog):
         else:
             embed = Embed(title=':warning: Command Error', description='Status: Bad argument input', color=discord.Colour.red())
             
-        embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.name}')
+        embed.set_footer(icon_url=ctx.author.avatar_url, text= f'Requested by {ctx.author.display_name}')
         await ctx.send(embed=embed)
